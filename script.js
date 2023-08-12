@@ -19,16 +19,16 @@ searchinput.addEventListener("keydown",function(event) {
   if (event.keyCode === 13 || event.key === 'Enter') {
         event.preventDefault();
         const api_key = document.getElementById("inputapi").value;
-        console.log(api_key);
+        // console.log(api_key);
         loader.classList.remove("close");
         loader.classList.add("show");
 
       console.log('Enter key was pressed');
-      console.log(searchinput.value);
+    //   console.log(searchinput.value);
       const SEARCH_TERM = searchinput.value;
     
         getMovie(SEARCH_TERM,api_key).then().catch(error=>{
-            // console.log(error);
+            console.log(error);
             const ErrorDiv = document.createElement("div");
             
             ErrorDiv.innerHTML= `${error} &nbsp; &nbsp; IF Not have APIKey Access from console `;
@@ -50,13 +50,13 @@ async function getMovie(SEARCH_TERM,api_key){
     const response  = await fetch(url);
     if(!response.ok){
         const result = await response.json();
-        // console.log(result.Error);
+        console.log(result.Error);
         throw new Error(`${result.Error}`);
     }
     const result = await response.json();
     loader.classList.remove("show");
     loader.classList.add("close");
-     // console.log(result);
+    //  console.log(result);
      allcards.innerHTML="";
     const movieArr= result.Search;
 
