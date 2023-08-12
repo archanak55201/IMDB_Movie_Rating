@@ -110,7 +110,7 @@ function getImage(Img){
 }
 
 async function getMovieId(imdbId,api_key){
-    const IMDBUrl = `http://www.omdbapi.com/?i=${imdbId}&apikey=${api_key}`;
+    const IMDBUrl = `https://www.omdbapi.com/?i=${imdbId}&apikey=${api_key}`;
     const response  = await fetch(IMDBUrl);
     const result = await response.json();
     // console.log(result);
