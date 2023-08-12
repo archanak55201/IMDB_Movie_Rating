@@ -1,18 +1,19 @@
 // const api_key="a20ad9eb";
 // const api_key="a20ad9eb1";
 
-console.log("connected");
+// console.log("connected");
+console.log("a20ad9eb");
 const api_key = document.getElementById("inputapi").value;
-console.log(api_key);
+// console.log(api_key);
 
 const searchinput = document.getElementById("searchstring");
-console.log(searchinput);
+// console.log(searchinput);
 
 const loader = document.getElementsByClassName("loader")[0];
-console.log(loader);
+// console.log(loader);
 
 const allcards = document.getElementsByClassName("all-cards")[0];
-console.log(allcards);
+// console.log(allcards);
 const SEARCH_TERM = "";
 searchinput.addEventListener("keydown",function(event) {
   if (event.keyCode === 13 || event.key === 'Enter') {
@@ -27,7 +28,7 @@ searchinput.addEventListener("keydown",function(event) {
       const SEARCH_TERM = searchinput.value;
     
         getMovie(SEARCH_TERM,api_key).then().catch(error=>{
-            console.log(error);
+            // console.log(error);
             const ErrorDiv = document.createElement("div");
             
             ErrorDiv.innerHTML= `${error} &nbsp; &nbsp; IF Not have APIKey Access from console `;
@@ -39,7 +40,7 @@ searchinput.addEventListener("keydown",function(event) {
     } 
 });
 const button = document.getElementById("search");
-console.log(button);
+// console.log(button);
 
 
 async function getMovie(SEARCH_TERM,api_key){
@@ -49,23 +50,23 @@ async function getMovie(SEARCH_TERM,api_key){
     const response  = await fetch(url);
     if(!response.ok){
         const result = await response.json();
-        console.log(result.Error);
+        // console.log(result.Error);
         throw new Error(`${result.Error}`);
     }
     const result = await response.json();
     loader.classList.remove("show");
     loader.classList.add("close");
-     console.log(result);
+     // console.log(result);
      allcards.innerHTML="";
     const movieArr= result.Search;
 
     movieArr.forEach((value)=>{
-    console.log(value.imdbID);
+    // console.log(value.imdbID);
 
     //fetching from Id======================================
     const imdbresult = getMovieId(value.imdbID,api_key);
     imdbresult.then(snippet=>{
-        console.log(snippet);
+        // console.log(snippet);
    
     //======================================================
         const src=getImage(value.Poster);
@@ -112,6 +113,6 @@ async function getMovieId(imdbId,api_key){
     const IMDBUrl = `http://www.omdbapi.com/?i=${imdbId}&apikey=${api_key}`;
     const response  = await fetch(IMDBUrl);
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     return result;
 }
