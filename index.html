@@ -13,7 +13,10 @@
         <form>
             <div class="input_div"><input type="text" placeholder="API_KEy" id="inputapi" value="a20ad9eb"></div>
             <div class="input_div"><input type="text" placeholder="Search" id="searchstring">
-                <!-- <button style="padding: 5px;color:white; font-size: large;background-color: rgba(23, 23, 61, 0.384);" type="submit" id="search">Search</button> -->
+            </div>
+            <div style="margin-left: 40vw;">
+                <button style=" color:white;width: 30%;padding:10px;background-image: linear-gradient(rgb(43, 68, 111) ,rgb(13, 23, 65)); font-size:22px;background-color: rgba(23, 23, 61, 0.384);" type="submit" id="searchbutton">Search</button>
+
             </div>
         </form>
     </div>
@@ -23,10 +26,13 @@
         </div>
         <div class="all-cards">
             <div class="card">
-                <div class="image">
+                <div class="image" style="position: relative;">
                     <img src="noImage.webp" alt="movie" style="width: 100%;">
+                    <div style="position: absolute;bottom: 0px;left: -1rem;">
+                        <span class="index">1</span>
+                    </div>
                 </div>
-                <div style="padding:5px;font-size: 20px;">
+                <div style="padding:5px;font-size: 20px;position: relative;">
                     <div class="rating">5.6rating</div>
                     <div class="movie-title">Gadar2</div>
                     <div class="movie-type">thrill</div>

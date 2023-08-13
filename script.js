@@ -7,6 +7,7 @@ const api_key = document.getElementById("inputapi").value;
 // console.log(api_key);
 
 const searchinput = document.getElementById("searchstring");
+const searchbutton = document.getElementById("searchbutton");
 // console.log(searchinput);
 
 const loader = document.getElementsByClassName("loader")[0];
@@ -15,8 +16,8 @@ const loader = document.getElementsByClassName("loader")[0];
 const allcards = document.getElementsByClassName("all-cards")[0];
 // console.log(allcards);
 const SEARCH_TERM = "";
-searchinput.addEventListener("keydown",function(event) {
-  if (event.keyCode === 13 || event.key === 'Enter') {
+searchbutton.addEventListener("click",function(event) {
+//   if (event.keyCode === 13 || event.key === 'Enter') {
         event.preventDefault();
         const api_key = document.getElementById("inputapi").value;
         // console.log(api_key);
@@ -37,8 +38,35 @@ searchinput.addEventListener("keydown",function(event) {
            
             allcards.appendChild(ErrorDiv);
         })
-    } 
+    // } 
 });
+
+//=================================On Enter===================================================
+searchinput.addEventListener("keydown",function(event) {
+      if (event.keyCode === 13 || event.key === 'Enter') {
+            event.preventDefault();
+            const api_key = document.getElementById("inputapi").value;
+            // console.log(api_key);
+            loader.classList.remove("close");
+            loader.classList.add("show");
+    
+          console.log('Enter key was pressed');
+        //   console.log(searchinput.value);
+          const SEARCH_TERM = searchinput.value;
+        
+            getMovie(SEARCH_TERM,api_key).then().catch(error=>{
+                console.log(error);
+                const ErrorDiv = document.createElement("div");
+                
+                ErrorDiv.innerHTML= `${error} &nbsp; &nbsp; IF Not have APIKey Access from console `;
+                ErrorDiv.classList.add("errordiv");
+                allcards.innerHTML="";
+               
+                allcards.appendChild(ErrorDiv);
+            })
+        } 
+    });
+//=====================================================================================
 const button = document.getElementById("search");
 // console.log(button);
 
@@ -46,7 +74,8 @@ const button = document.getElementById("search");
 async function getMovie(SEARCH_TERM,api_key){
     console.log(SEARCH_TERM,api_key);
     try{
-    const url = `https://www.omdbapi.com/?s=${SEARCH_TERM}&apikey=${api_key}`;
+        const pageToFetch= 1;
+    const url = `https://www.omdbapi.com/?s=${SEARCH_TERM}&apikey=${api_key}&page=${pageToFetch}`;
     const response  = await fetch(url);
     if(!response.ok){
         const result = await response.json();
@@ -56,10 +85,10 @@ async function getMovie(SEARCH_TERM,api_key){
     const result = await response.json();
     loader.classList.remove("show");
     loader.classList.add("close");
-    //  console.log(result);
+     console.log(result);
      allcards.innerHTML="";
     const movieArr= result.Search;
-
+    var index = 1;
     movieArr.forEach((value)=>{
     // console.log(value.imdbID);
 
@@ -72,12 +101,14 @@ async function getMovie(SEARCH_TERM,api_key){
         const src=getImage(value.Poster);
         const card = document.createElement("div");
             card.innerHTML=`
-                    <div class="image" style="height:63%" >
+                    <div class="image" style="position: relative;margin-bottom:20px;" >
                     
-                        <img src="${src}" alt="movie" style="width: 100%;">
-                            
+                        <img src="${src}" alt="movie" style="width: 100%;height:100%">
+                        <div style="position: absolute;bottom: 0px;left: -1rem;">
+                            <span class="index">${index++}</span>
+                        </div> 
                     </div>
-                    <div style="padding:5px;font-size: 20px;height:37%;margin-bottom:5px">
+                    <div style="padding:5px;font-size: 20px;margin-bottom:5px;">
                         <div class="rating">${snippet.imdbRating}<i class="fa-solid fa-star" style="color: #f2f519;"></i></div>
                         <div class="movie-title">${value.Title}</div>
                         <div class="movie-type"> ${snippet.Genre} </div>
@@ -90,7 +121,9 @@ async function getMovie(SEARCH_TERM,api_key){
             `;
             card.className="card";
             allcards.appendChild(card);
+        
     })
+    // index++;
     })
 
     }catch(error){

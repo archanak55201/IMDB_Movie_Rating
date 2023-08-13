@@ -18,16 +18,16 @@ body{
     display: none;
 }
 .load{
-    border: 5px solid transparent;
+    border: 5px dotted rgba(121, 121, 121, 0.966);
     /* border-image: linear-gradient(red,yellow); */
     /* background-image: linear-gradient(red,yellow); */
     width: 40px;
     height: 40px;
     margin: 10px;
     border-radius: 50%;
-    box-shadow:  1px 5px rgb(255, 81, 0);
-    /* border-right-color: red; */
-    /* border-left-color: yellow; */
+    /* box-shadow:  1px 5px rgb(255, 81, 0); */
+    border-right-color: red;
+    border-left-color: yellow;
    
     animation: loading 0.8s ease-in-out infinite;
 }
@@ -77,7 +77,8 @@ input{
     flex-direction: row;
     flex-wrap: wrap;
     padding-left: 0.8vw;
-    gap: 0.8vw;
+    gap: 1vw;
+    row-gap: 5vh;
 }
 .card{
     /* border: 1px solid green; */
@@ -86,7 +87,8 @@ input{
     background-color: rgba(40, 40, 63, 0.615);
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    position: relative;
+    gap: 15px;
 }
 
 @media (max-width:1400px) {
@@ -103,6 +105,13 @@ input{
     .card{
         width:calc(100% - 20px); 
     }
+}
+.index{
+    color: rgba(215, 240, 27, 0.384);
+    font-size: 7rem;
+    -webkit-text-stroke: 2px rgb(12, 12, 12);
+    font-weight: 700;
+    /* position: absolute; */
 }
 .movie-title{
     font-size: 24px;
